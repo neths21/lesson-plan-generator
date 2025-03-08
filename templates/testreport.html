@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Analysis - Physics</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #003366;
+            padding: 10px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            display: inline;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        /* Student Analysis Container */
+        .analysis-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        .unit-section {
+            margin-bottom: 40px;
+        }
+
+        .unit-section h3 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .performance-bar {
+            height: 12px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+        }
+
+        .performance-bar > div {
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .green { background-color: #4caf50; } /* Above 80 */
+        .yellow { background-color: #ffeb3b; } /* 60-80 */
+        .red { background-color: #f44336; } /* Below 60 */
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Dashboard</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="test_report">Test Report</a></li>
+            <li><a href="lesson_plan">Lesson Plans</a></li>
+            <li><a href="students_analysis">Student Analysis</a></li>
+        </ul>
+    </nav>
+
+    <!-- Student Analysis Section -->
+    <div class="analysis-container">
+
+        <h2>Physics - Unit Wise Performance</h2>
+
+        <!-- Units -->
+        <script>
+            const students = [
+                { name: "Elmor", scores: [85, 58, 90, 65, 72] },
+                { name: "Quakaroon", scores: [70, 85, 75, 88, 92] },
+                { name: "Johngli", scores: [95, 88, 55, 78, 45] }
+            ];
+
+            const units = ["Mechanics", "Thermodynamics", "Electromagnetism", "Optics", "Electricity"];
+            
+            document.write(units.map((unit, index) => `
+                <div class="unit-section">
+                    <h3>Unit ${index + 1}: ${unit}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                                <th>Performance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${students.map(student => {
+                                let score = student.scores[index];
+                                let grade = score >= 90 ? "A+" : score >= 80 ? "A" : score >= 70 ? "B" : score >= 60 ? "C" : "D";
+                                let performanceClass = score > 80 ? "green" : score >= 60 ? "yellow" : "red";
+                                return `
+                                    <tr>
+                                        <td>${student.name}</td>
+                                        <td>${score}</td>
+                                        <td>${grade}</td>
+                                        <td>
+                                            <div class="performance-bar">
+                                                <div class="${performanceClass}" style="width: ${score}%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join(''));
+        </script>
+
+    </div>
+
+</body>
+</html>

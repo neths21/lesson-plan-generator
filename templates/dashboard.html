@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Progress Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #003366;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        .dashboard {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .progress-section {
+            margin-bottom: 30px;
+        }
+        .student {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .progress-bar-container {
+            background: #e1e1e1;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 20px;
+            width: 100%;
+        }
+        .progress-bar {
+            height: 100%;
+            text-align: center;
+            font-size: 14px;
+            line-height: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .test-analysis {
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f9f9f9;
+            color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #003366;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background: #f4f4f4;
+        }
+        tr:hover {
+            background: #d1e0e0;
+        }
+
+        .lesson-plan-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #0052cc;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .lesson-plan-btn:hover {
+            background: #003366;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Dashboard</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="test_report">Test Report</a></li>
+            <li><a href="lesson_plan">Lesson Plans</a></li>
+            <li><a href="students_analysis">Student Analysis</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard">
+        <h2>Student Progress Dashboard</h2>
+
+        <div class="progress-section">
+            <h3>Study Progress</h3>
+            <div class="student" data-progress="80">elmor</div>
+            <div class="student" data-progress="30">quakaroon</div>
+            <div class="student" data-progress="85">johngli</div>
+        </div>
+
+        <div class="test-analysis">
+            <h3>Test Analysis</h3>
+            <table>
+                <tr>
+                    <th>Student</th>
+                    <th>Score</th>
+                    <th>Grade</th>
+                </tr>
+                <tr><td>elmor</td><td>85</td><td>B+</td></tr>
+                <tr><td>quakaroon</td><td>90</td><td>A</td></tr>
+                <tr><td>johngli</td><td>76</td><td>C+</td></tr>
+            </table>
+        </div>
+
+   
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".student").forEach(student => {
+                let progress = parseInt(student.getAttribute("data-progress"));
+                let color = progress > 80 ? "#00b300" : progress >= 60 ? "#ffcc00" : "#ff0000";
+                let progressBar = document.createElement("div");
+                progressBar.classList.add("progress-bar");
+                progressBar.style.width = progress + "%";
+                progressBar.style.background = color;
+                progressBar.textContent = progress + "%";
+                let container = document.createElement("div");
+                container.classList.add("progress-bar-container");
+                container.appendChild(progressBar);
+                student.appendChild(container);
+            });
+        });
+    </script>
+</body>
+</html>
